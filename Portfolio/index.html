@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Página Semántica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Portfolio de Lázaro Lironis</h1>
+            <p>Desarrollador Front-End apasionado por la accesibilidad y el diseño responsivo</p>
+        </header>
+
+        <nav role="navigation" aria-label="Menu principal">
+            <div class="nav-list">
+                <ul>
+                    <li><a href="#sobre-mi">Sobre mí</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            <div class="grid">
+                <section id="sobre-mi">
+                    <h2>Sobre mí</h2>
+                    <p>Me especializo en Angular, TypeScript y CSS moderno. Busco crear interfaces limpias, accesibles y
+                        bien
+                        documentadas.</p>
+                </section>
+
+                <aside>
+                    <h3>Skills técnicas</h3>
+                    <div class="skills-list">
+                        <ul>
+                            <li>HTML5 semántico</li>
+                            <li>CSS modular y escalable</li>
+                            <li>JavaScript y TypeScript</li>
+                            <li>Angular y RxJS</li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <section id="proyectos">
+                    <h2>Proyectos destacados</h2>
+                    <div class="proyectos-grid">
+                        <div class="proyecto-card">
+                            <h3>App de tareas</h3>
+                            <p>Angular + RxJS. Accesibilidad, componentes reutilizables y documentación clara.</p>
+                        </div>
+                        <div class="proyecto-card">
+                            <h3>Landing institucional</h3>
+                            <p>HTML5 + CSS modular. Diseño responsivo y semántico para ONG local.</p>
+                        </div>
+                        <div class="proyecto-card">
+                            <h3>Dashboard freelance</h3>
+                            <p>TypeScript + Angular Material. Visualización de métricas y filtros dinámicos.</p>
+                        </div>
+                    </div>
+                </section>
+
+
+                <article>
+                    <h2>Último proyecto destacado</h2>
+                    <p>Desarrollé una aplicación de tareas con Angular, aplicando buenas prácticas de componentes,
+                        accesibilidad
+                        y documentación técnica.</p>
+                </article>
+
+            </div>
+
+            <section id="contacto">
+                <h2>Contacto</h2>
+                <p>¿Interesado en colaborar? Hablemos!
+                </p>
+                <form class="formulario-contacto">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required />
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required />
+
+                    <label for="mensaje">Mensaje</label>
+                    <textarea name="mensaje" id="mensaje" rows="5" required></textarea>
+
+                    <button type="submit">Enviar Mensaje</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2025 Lázaro Lironis — Todos los derechos reservados</p>
+            <p><a href="mailto:lazaro.dev@example.com">lazaro.dev@example.com</a></p>
+        </footer>
+    </div>
+</body>
+
+</html>
