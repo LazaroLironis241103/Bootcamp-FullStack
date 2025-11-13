@@ -1,103 +1,245 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mi Página Semántica</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lázaro Lironis — Frontend Developer</title>
+  <meta name="description" content="Portfolio de Lázaro Lironis — desarrollador Frontend. Experiencias web accesibles, intuitivas y visualmente atractivas.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <h1>Portfolio de Lázaro Lironis</h1>
-            <p>Desarrollador Front-End apasionado por la accesibilidad y el diseño responsivo</p>
-        </header>
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
 
-        <nav role="navigation" aria-label="Menu principal">
-            <div class="nav-list">
-                <ul>
-                    <li><a href="#sobre-mi">Sobre mí</a></li>
-                    <li><a href="#proyectos">Proyectos</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
-        </nav>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Inicio - Lázaro Lironis">
+        <img class="brand__logo" src="https://i.pinimg.com/originals/7c/f1/da/7cf1da8d5885498503b1c7b5f3ef9b8f.png" alt="Logotipo LL">
+        <h1 class="brand__title">Lázaro Lironis</h1>
+      </a>
 
-        <main>
-            <div class="grid">
-                <section id="sobre-mi">
-                    <h2>Sobre mí</h2>
-                    <p>Me especializo en Angular, TypeScript y CSS moderno. Busco crear interfaces limpias, accesibles y
-                        bien
-                        documentadas.</p>
-                </section>
+      <div class="header-controls" role="group" aria-label="Controles de cabecera">
+        <button class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Cambiar tema" title="Cambiar tema">
+          <span class="theme-icon" aria-hidden="true"></span>
+        </button>
 
-                <aside>
-                    <h3>Skills técnicas</h3>
-                    <div class="skills-list">
-                        <ul>
-                            <li>HTML5 semántico</li>
-                            <li>CSS modular y escalable</li>
-                            <li>JavaScript y TypeScript</li>
-                            <li>Angular y RxJS</li>
-                        </ul>
-                    </div>
-                </aside>
+        <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-navigation" aria-label="Abrir menú" title="Abrir menú">
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+      </div>
 
-                <section id="proyectos">
-                    <h2>Proyectos destacados</h2>
-                    <div class="proyectos-grid">
-                        <div class="proyecto-card">
-                            <h3>App de tareas</h3>
-                            <p>Angular + RxJS. Accesibilidad, componentes reutilizables y documentación clara.</p>
-                        </div>
-                        <div class="proyecto-card">
-                            <h3>Landing institucional</h3>
-                            <p>HTML5 + CSS modular. Diseño responsivo y semántico para ONG local.</p>
-                        </div>
-                        <div class="proyecto-card">
-                            <h3>Dashboard freelance</h3>
-                            <p>TypeScript + Angular Material. Visualización de métricas y filtros dinámicos.</p>
-                        </div>
-                    </div>
-                </section>
+      <nav id="main-navigation" class="primary-nav" role="navigation" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#inicio" aria-current="page">Inicio</a></li>
+          <li><a class="nav-link" href="#sobre-mi">Sobre mí</a></li>
+          <li><a class="nav-link" href="#habilidades">Habilidades</a></li>
+          <li><a class="nav-link" href="#proyectos">Proyectos</a></li>
+          <li><a class="nav-link" href="#blog">Blog</a></li>
+          <li><a class="nav-link" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
 
-
-                <article>
-                    <h2>Último proyecto destacado</h2>
-                    <p>Desarrollé una aplicación de tareas con Angular, aplicando buenas prácticas de componentes,
-                        accesibilidad
-                        y documentación técnica.</p>
-                </article>
-
-            </div>
-
-            <section id="contacto">
-                <h2>Contacto</h2>
-                <p>¿Interesado en colaborar? Hablemos!
-                </p>
-                <form class="formulario-contacto">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" required />
-
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required />
-
-                    <label for="mensaje">Mensaje</label>
-                    <textarea name="mensaje" id="mensaje" rows="5" required></textarea>
-
-                    <button type="submit">Enviar Mensaje</button>
-                </form>
-            </section>
-        </main>
-
-        <footer>
-            <p>© 2025 Lázaro Lironis — Todos los derechos reservados</p>
-            <p><a href="mailto:lazaro.dev@example.com">lazaro.dev@example.com</a></p>
-        </footer>
+      <div class="header-cta">
+        <a class="btn btn--primary" href="/cv.pdf" download aria-label="Descargar currículum">Descargar CV</a>
+      </div>
     </div>
+  </header>
+
+  <main id="main" class="site-main">
+    <section id="inicio" class="hero" role="region" aria-label="Presentación">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <p class="kicker">Desarrollador Frontend</p>
+          <h2 class="hero-title">Lázaro Lironis</h2>
+          <p class="hero-subtitle">Creando experiencias web accesibles, intuitivas y visualmente atractivas</p>
+          <div class="hero-actions">
+            <a class="btn btn--primary" href="#proyectos">Ver proyectos</a>
+            <a class="btn btn--secondary" href="#contacto">Contactar</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-blob" role="img" aria-label="Elemento decorativo"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre-mi" class="about" role="region" aria-label="Sobre mí">
+      <div class="container about-grid">
+        <div class="about-text">
+          <h3 class="section-title">Sobre mí</h3>
+          <p>Soy Frontend Developer con background en diseño. Me especializo en código semántico, accesibilidad (WCAG) y rendimiento. Disfruto transformar problemas técnicos en soluciones limpias y fáciles de mantener.</p>
+          <p>Trabajo con Angular y TypeScript, y me interesa documentar decisiones técnicas para que cada proyecto sea educativo y escalable.</p>
+        </div>
+
+        <aside class="about-meta" aria-labelledby="availability-title">
+          <h4 id="availability-title" class="meta-title">Estado</h4>
+          <p class="meta-item meta-available" aria-hidden="false">● Disponible para nuevos proyectos</p>
+          <h4 class="meta-title">Ubicación</h4>
+          <p class="meta-item">La Plata, Argentina</p>
+          <h4 class="meta-title">Contacto rápido</h4>
+          <p class="meta-item"><a href="mailto:tu-email@ejemplo.com">tu-email@ejemplo.com</a></p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="habilidades" class="skills" role="region" aria-label="Habilidades técnicas">
+      <div class="container">
+        <h3 class="section-title">Habilidades Técnicas</h3>
+        <div class="skills-grid" role="list">
+          <article class="skill-card" role="listitem" aria-labelledby="skill-frontend">
+            <h4 id="skill-frontend">Frontend</h4>
+            <p>Angular (Avanzado); TypeScript (Avanzado); HTML5 & CSS3 (Avanzado); JavaScript (Intermedio); WCAG (Avanzado)</p>
+          </article>
+
+          <article class="skill-card" role="listitem" aria-labelledby="skill-tools">
+            <h4 id="skill-tools">Tools</h4>
+            <p>Git & GitHub; VS Code; Figma; npm / yarn</p>
+          </article>
+
+          <article class="skill-card" role="listitem" aria-labelledby="skill-testing">
+            <h4 id="skill-testing">Testing</h4>
+            <p>Jest; Testing Library; Cypress</p>
+          </article>
+
+          <article class="skill-card" role="listitem" aria-labelledby="skill-devops">
+            <h4 id="skill-devops">DevOps</h4>
+            <p>Docker; CI/CD (GitHub Actions); Vercel / Netlify</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="projects" role="region" aria-label="Proyectos destacados">
+      <div class="container">
+        <h3 class="section-title">Proyectos Destacados</h3>
+        <div class="projects-grid">
+          <article class="project-card" aria-labelledby="proj-1">
+            <img class="project-thumb" src="https://picsum.photos/seed/p1/800/500" alt="Miniatura Proyecto Uno">
+            <div class="project-body">
+              <h4 id="proj-1">Project One</h4>
+              <p class="project-tags">Diseño · CSS</p>
+              <p class="project-desc">Sitio con diseño moderno y minimalista, enfoque en tipografía y ritmo visual.</p>
+              <div class="project-actions">
+                <a class="btn btn--ghost" href="#" aria-label="Ver proyecto One">Vista</a>
+                <a class="btn btn--ghost" href="#" aria-label="Código proyecto One">Código</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" aria-labelledby="proj-2">
+            <img class="project-thumb" src="https://picsum.photos/seed/p2/800/500" alt="Miniatura Proyecto Dos">
+            <div class="project-body">
+              <h4 id="proj-2">Project Two</h4>
+              <p class="project-tags">Diseño · Accesibilidad</p>
+              <p class="project-desc">Aplicación centrada en accesibilidad: navegación por teclado y lectores de pantalla.</p>
+              <div class="project-actions">
+                <a class="btn btn--ghost" href="#" aria-label="Ver proyecto Two">Vista</a>
+                <a class="btn btn--ghost" href="#" aria-label="Código proyecto Two">Código</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" aria-labelledby="proj-3">
+            <img class="project-thumb" src="https://picsum.photos/seed/p3/800/500" alt="Miniatura Proyecto Tres">
+            <div class="project-body">
+              <h4 id="proj-3">Project Three</h4>
+              <p class="project-tags">Performance</p>
+              <p class="project-desc">Portfolio de fotógrafo optimizado para carga progresiva y experiencia móvil.</p>
+              <div class="project-actions">
+                <a class="btn btn--ghost" href="#" aria-label="Ver proyecto Three">Vista</a>
+                <a class="btn btn--ghost" href="#" aria-label="Código proyecto Three">Código</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog" class="blog" role="region" aria-label="Blog y artículos">
+      <div class="container">
+        <h3 class="section-title">Blog / Artículos</h3>
+        <ul class="posts-list">
+          <li class="post-item">
+            <a href="#" class="post-link">
+              <h4>Manejo de estado en Angular con NGRX</h4>
+              <p class="post-excerpt">Patrones y prácticas para escalar la gestión de estado en aplicaciones Angular.</p>
+            </a>
+          </li>
+
+          <li class="post-item">
+            <a href="#" class="post-link">
+              <h4>Optimizando el Performance en el Frontend</h4>
+              <p class="post-excerpt">Estrategias de caché, lazy-loading y optimización crítica de renderizado.</p>
+            </a>
+          </li>
+
+          <li class="post-item">
+            <a href="#" class="post-link">
+              <h4>Principios de Accesibilidad Web (WCAG) para Desarrolladores</h4>
+              <p class="post-excerpt">Guía práctica para implementar requisitos de accesibilidad desde el inicio del proyecto.</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contacto" class="contact" role="region" aria-label="Contacto">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <h3 class="section-title">Contacto</h3>
+          <p class="contact-lead" style="margin-top:.6rem;">¿Tienes un proyecto en mente o querés conectar? Envíame un mensaje y te responderé lo antes posible.</p>
+          <p style="margin-top:.5rem; color:var(--muted);">También podés escribir a <a href="mailto:tu-email@ejemplo.com">tu-email@ejemplo.com</a></p>
+        </div>
+
+        <form id="contact-form" class="contact-form" action="#" method="post" novalidate>
+          <div class="form-row">
+            <label for="name">Nombre</label>
+            <input id="name" name="name" type="text" required autocomplete="name" />
+          </div>
+
+          <div class="form-row">
+            <label for="email">Correo electrónico</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+
+          <div class="form-row">
+            <label for="subject">Asunto</label>
+            <input id="subject" name="subject" type="text" required />
+          </div>
+
+          <div class="form-row">
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn--primary" type="submit">Enviar mensaje</button>
+          </div>
+
+          <div id="form-status" class="form-status" aria-live="polite" hidden></div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>© 2024 Lázaro Lironis. Todos los derechos reservados.</p>
+      <nav class="social" aria-label="Redes sociales">
+        <ul class="social-list">
+          <li><a href="#" aria-label="GitHub" class="social-link">GitHub</a></li>
+          <li><a href="#" aria-label="LinkedIn" class="social-link">LinkedIn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 
 </html>
