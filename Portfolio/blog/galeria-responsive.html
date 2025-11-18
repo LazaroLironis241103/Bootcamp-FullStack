@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Galería responsive — cómo resolví recorte y rendimiento</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Mini caso: diseño de una galería responsive con mejora en LCP, reducción de CLS y enfoque en accesibilidad.">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<main>
+<article class="post">
+  <header>
+    <h1>Galería responsive — cómo resolví recorte y rendimiento</h1>
+    <p class="post-meta">03 nov 2025 • ⏱ 6 min • <span class="tag">Performance</span><span class="tag">Imágenes</span></p>
+    <p class="lead">TL;DR: combiné <code>&lt;picture&gt;</code>, placeholders y <code>aspect-ratio</code> para evitar recortes y mejorar LCP sin usar CDN.</p>
+  </header>
+
+  <div class="post-body">
+    <h2>Contexto</h2>
+    <p>Proyecto: galería de práctica para el portfolio. Objetivo: mostrar miniaturas confiables en móvil y escritorio, con prioridad en rendimiento y sin recortes extraños al reflow.</p>
+
+    <h2>Problema</h2>
+    <p>Al reordenar la grilla en móvil algunas miniaturas cambiaban su altura y provocaban CLS; además, la carga inicial incluía imágenes demasiado pesadas para el LCP.</p>
+
+    <h2>Decisiones técnicas</h2>
+    <p>Elegí soluciones simples y robustas:</p>
+    <ul>
+      <li>Usar <code>&lt;picture&gt;</code> para servir formatos modernos (AVIF/WebP) según la pantalla.</li>
+      <li>Placeholder blur-up con SVG inline para mantener el ratio y evitar saltos.</li>
+      <li>Aprovechar <code>aspect-ratio</code> y <code>object-fit:cover</code> para evitar recortes inesperados y reflow.</li>
+      <li>Lazy-loading nativo (<code>loading="lazy"</code>) y <code>decoding="async"</code>.</li>
+    </ul>
+
+    <h3>Snippet representativo</h3>
+    <pre><code>&lt;picture&gt;
+  &lt;source srcset="img/photo-400.avif" type="image/avif" media="(max-width:600px)"&gt;
+  &lt;img src="img/photo-800.jpg" alt="Descripción accesible" loading="lazy" decoding="async" style="aspect-ratio:4/3;object-fit:cover"&gt;
+&lt;/picture&gt;</code></pre>
+
+    <h2>Validaciones y pruebas</h2>
+    <p>Medí antes/después en Lighthouse (móvil) y con pruebas manuales:</p>
+    <ul>
+      <li>Optimización de LCP: reducción observada de ~1s en páginas con hero de galería (depende del proyecto).</li>
+      <li>CLS: eliminar saltos usando contenedores con <code>aspect-ratio</code> y placeholders redujo el CLS a <code>&lt; 0.05</code> en mi prueba local.</li>
+      <li>Accesibilidad: descripciones en <code>alt</code>, foco en miniaturas navegables por teclado.</li>
+    </ul>
+
+    <h2>Resultado</h2>
+    <p>Galería más estable visualmente, carga inicial más rápida sin inversión en infraestructura y experiencia consistente en mobile. Aprendizaje: priorizar layout estable (aspect-ratio + placeholders) antes de optimizar formatos.</p>
+
+    <h2>Qué haría distinto</h2>
+    <p>En producción usaría CDN y generación automática de tamaños en build step; también evaluaría usar preconnect para fuentes críticas.</p>
+
+    <h2>Enlaces</h2>
+    <p>Repo de ejemplo: <a href="https://github.com/tu/repo-galeria" data-repo target="_blank" rel="noopener">github.com/tu/repo-galeria</a></p>
+  </div>
+</article>
+</main>
+</body>
+</html>

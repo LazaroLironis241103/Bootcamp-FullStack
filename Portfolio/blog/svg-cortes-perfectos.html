@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>SVG — evitar cortes en iconos embebidos</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Micro-tip: cómo evitar cortes en SVG embebidos usando viewBox, preserveAspectRatio y overflow.">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<main>
+<article class="post">
+  <header>
+    <h1>SVG — evitar cortes en iconos embebidos</h1>
+    <p class="post-meta">18 nov 2025 • ⏱ 3 min • <span class="tag">SVG</span><span class="tag">CSS</span></p>
+    <p class="lead">TL;DR: ajustar viewBox, preserveAspectRatio y overflow evita recortes al escalar; usa vector-effect si quieres que el stroke no cambie.</p>
+  </header>
+
+  <div class="post-body">
+    <h2>Problema</h2>
+    <p>Iconos SVG inline se ven recortados en botones circulares, al aplicar transformaciones o al usar sombras/filters. Suele ocurrir porque la caja del SVG (viewBox) no incluye todos los trazos o porque el contenedor limita el overflow.</p>
+
+    <h2>Solución práctica</h2>
+    <p>Revisá y aplicá estos puntos mínimos en el propio SVG y en su contenedor:</p>
+    <ul>
+      <li>Asegurá un <code>viewBox</code> que cubra todo el dibujo; si el stroke sale del área, ampliá el viewBox o añadí padding visual.</li>
+      <li>Usá <code>preserveAspectRatio="xMidYMid meet"</code> para mantener alineación central y evitar recortes en contenedores flexibles.</li>
+      <li>Permití overflow visible si necesitás que sombras o filtros se muestren fuera del viewport del SVG: <code>style="overflow:visible"</code>.</li>
+      <li>Si querés que el borde no escale, añadí <code>vector-effect="non-scaling-stroke"</code> al <code>&lt;path&gt;</code>.</li>
+    </ul>
+
+    <pre><code>&lt;svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style="overflow:visible" role="img" aria-hidden="true"&gt;
+  &lt;path d="..." fill="currentColor" vector-effect="non-scaling-stroke"/&gt;
+&lt;/svg&gt;</code></pre>
+
+    <h2>Cómo lo apliqué</h2>
+    <p>En mi sección de habilidades reemplacé iconos con cortes por variantes inline con viewBox ajustado y <code>overflow:visible</code>. Para botones circulares usé <code>padding</code> en el viewBox y <code>object-fit</code> cuando el SVG venía como &lt;img&gt;.</p>
+
+    <h2>Resultado</h2>
+    <p>Iconos que escalan sin cortes, consistencia visual entre tamaños y temas, y menor necesidad de hacks CSS por tamaño del contenedor.</p>
+
+    <h2>Repositorio</h2>
+    <p><a href="https://github.com/tu/repo-svg" data-repo target="_blank" rel="noopener">Ver ejemplo en GitHub</a></p>
+  </div>
+</article>
+</main>
+</body>
+</html>

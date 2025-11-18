@@ -1,0 +1,38 @@
+<article class="post">
+  <header>
+    <h1>WCAG práctica en mi portfolio — checklist</h1>
+    <p class="post-meta">12 oct 2025 • ⏱ 5 min • <span class="tag">Accesibilidad</span></p>
+    <p class="lead">TL;DR: aplico una lista corta y accionable en cada proyecto: semántica, foco visible, contraste, teclado y feedback dinámico.</p>
+  </header>
+
+  <div class="post-body">
+    <h2>Checklist rápida</h2>
+    <ul>
+      <li><strong>Semántica</strong>: estructura con <code>&lt;header&gt;&lt;main&gt;&lt;nav&gt;&lt;article&gt;&lt;footer&gt;</code> y headings en orden.</li>
+      <li><strong>Foco visible</strong>: estilos claros y contraste para estados :focus; nunca confiar solo en color.</li>
+      <li><strong>Contraste</strong>: texto importante ≥ 4.5:1; textos grandes ≥ 3:1. Verificar botones y estados hover/focus.</li>
+      <li><strong>Teclado</strong>: recorrido completo por teclado; modales trap focus; menús móviles accesibles.</li>
+      <li><strong>Etiquetas y formularios</strong>: cada input con <code>&lt;label for&gt;</code> y estados de validación anunciados con <code>aria-live</code>.</li>
+      <li><strong>Imágenes</strong>: <code>alt</code> descriptivo y role cuando sea necesario; decorativas con <code>alt=""</code>.</li>
+      <li><strong>Lectores</strong>: elementos dinámicos anuncian cambios (toast, status) usando <code>aria-live="polite"</code> o <code>assertive</code> según contexto.</li>
+    </ul>
+
+    <h2>Ejemplo práctico: modal accesible</h2>
+    <p>Requisitos mínimos que aplico a todos los modales:</p>
+    <ol>
+      <li>Trap focus mientras el modal está abierto.</li>
+      <li>Restaurar foco al elemento que abrió el modal al cerrarlo.</li>
+      <li>Botón de cerrar con etiqueta visible y <code>aria-label</code> si es un icono.</li>
+      <li>Evitar scroll del body cuando está abierto (overflow hidden) y asegurar contraste interno.</li>
+    </ol>
+
+    <h2>Cómo lo apliqué en este portfolio</h2>
+    <p>El formulario de contacto usa <code>aria-live</code> para el estado, inputs con labels y tabindex natural. Los iconos SVG incluyen <code>role="img"</code> o <code>aria-hidden</code> según correspondencia, y el menú móvil mantiene un foco inicial y cierre con Escape.</p>
+
+    <h2>Recursos rápidos</h2>
+    <p>Si querés integrar esto de forma automatizada, incorpora tests de contraste en tu CI y pruebas básicas de teclado en tu checklist de PR.</p>
+
+    <h2>Repositorio</h2>
+    <p><a href="https://github.com/tu/repo-accessibility" data-repo target="_blank" rel="noopener">Ejemplos y snippets en GitHub</a></p>
+  </div>
+</article>

@@ -142,3 +142,85 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+/* Blog: filtrado, prefetch y modal accesible */
+(function () {
+  const posts = document.querySelectorAll('.post-item');
+  const dialog = document.getElementById('post-dialog');
+  const dialogTitle = document.getElementById('dialog-title');
+  const dialogMeta = document.getElementById('dialog-meta');
+  const dialogContent = document.getElementById('dialog-content');
+  const dialogRepo = document.getElementById('dialog-repo');
+  const dialogClose = document.getElementById('dialog-close');
+  let lastFocused = null;
+
+
+  // Prefetch ligero al hover (no bloqueante)
+  document.querySelectorAll('a[data-prefetch]').forEach(a => {
+    let fetched = false;
+    a.addEventListener('mouseenter', () => {
+      if (fetched) return;
+      fetched = true;
+      const url = a.getAttribute('href');
+      if (!url) return;
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => fetch(url, { method: 'GET', credentials: 'omit' }).catch(()=>{}));
+      } else {
+        fetch(url, { method: 'GET', credentials: 'omit' }).catch(()=>{});
+      }
+    }, { passive: true });
+  });
+
+  // Abrir artículo en dialog
+  document.querySelectorAll('.post-link').forEach(link => {
+    link.addEventListener('click', async (e) => {
+      e.preventDefault();
+      lastFocused = document.activeElement;
+      const li = link.closest('.post-item');
+      const slug = li?.dataset?.slug;
+      const url = link.getAttribute('href') || (slug ? `/blog/${slug}.html` : null);
+      try {
+        if (!url) throw new Error('no-url');
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error('not found');
+        const html = await res.text();
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        const article = tmp.querySelector('article.post') || tmp;
+        dialogTitle.textContent = article.querySelector('h1,h2')?.textContent || link.querySelector('.post-title')?.textContent || 'Artículo';
+        dialogMeta.textContent = article.querySelector('.post-meta')?.textContent || li.querySelector('.post-meta')?.textContent || '';
+        dialogContent.innerHTML = article.querySelector('.post-body')?.innerHTML || article.innerHTML;
+        dialogRepo.href = article.querySelector('a[data-repo]')?.href || '#';
+      } catch (err) {
+        dialogTitle.textContent = 'Artículo no disponible';
+        dialogContent.textContent = 'No se pudo cargar el contenido en este momento.';
+        dialogRepo.href = '#';
+      }
+      try { dialog.showModal(); } catch (e) { /* fallback para navegadores sin dialog */ }
+      const focusTarget = dialog.querySelector('.post-article');
+      if (focusTarget) focusTarget.focus();
+    });
+  });
+
+  // Cerrar diálogo y restaurar foco
+  dialogClose?.addEventListener('click', () => {
+    dialog.close();
+    if (lastFocused) lastFocused.focus();
+  });
+  dialog.addEventListener('cancel', (e) => {
+    e.preventDefault();
+    dialog.close();
+    if (lastFocused) lastFocused.focus();
+  });
+
+  // Trap focus dentro del dialog
+  dialog.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const focusable = dialog.querySelectorAll('a[href], button, input, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+})();
