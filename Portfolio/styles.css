@@ -70,48 +70,37 @@ body{
 .header-cta{margin-left:1rem}
 
 /* Buttons base */
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .9rem;border-radius:10px;font-weight:700;text-decoration:none;color:inherit;border:0;cursor:pointer;transition:transform .12s ease, box-shadow var(--trans), background var(--trans)}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.55rem .9rem;border-radius:10px;font-weight:700;
+  text-decoration:none;color:inherit;border:0;cursor:pointer;
+  transition:transform .12s ease, box-shadow var(--trans), background var(--trans)
+}
 .btn:active{transform:translateY(1px)}
 
-/* Primary button: modo claro texto oscuro por defecto */
 .btn--primary{
-  color: #04233a;
+  color:#04233a;
   background: linear-gradient(90deg,var(--accent), color-mix(in srgb, var(--accent) 40%, var(--accent-2) 60%));
   box-shadow: 0 8px 26px rgba(11,36,80,0.08);
 }
-
-/* Secondary and ghost */
-.btn--secondary{background: transparent;border:1px solid rgba(0,0,0,0.06);color:var(--text)}
+.btn--secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--text)}
 .btn--ghost{background:transparent;border:1px dashed rgba(0,0,0,0.06);color:var(--text)}
 
-/* Estado - Ubicacion - Contacto Rapido */
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: .4rem;
-}
-.icon {
-  flex-shrink: 0;
-}
-.meta-available .icon circle {
-  fill: #28a745; /* verde accesible */
-}
+/* Estado - Ubicación */
+.meta-item {display:flex;align-items:center;gap:.4rem;}
+.icon {flex-shrink:0;}
+.meta-available .icon circle {fill:#28a745;} /* verde accesible */
 
-/* Ilustracion */
+/* Ilustración */
 .hero-illustration {
-  width: 320px;
-  height: auto;
-  display: block;
-  margin-left: auto;
+  width:320px;height:auto;display:block;margin-left:auto;
   filter: drop-shadow(0 6px 20px rgba(0,0,0,0.06));
   animation: fadeInScale .8s ease-out both;
 }
-
 @keyframes fadeInScale {
-  0% { opacity: 0; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1); }
+  0% { opacity:0; transform:scale(0.95); }
+  100% { opacity:1; transform:scale(1); }
 }
-
 
 /* Nav */
 .primary-nav{display:block}
@@ -124,18 +113,21 @@ body{
 .nav-toggle{display:none;background:transparent;border:0;padding:.375rem;border-radius:8px;cursor:pointer}
 .hamburger{width:22px;height:2px;background:var(--text);display:block;position:relative;border-radius:2px}
 .hamburger::before,.hamburger::after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--text);border-radius:2px}
-.hamburger::before{top:-7px} .hamburger::after{bottom:-7px}
+.hamburger::before{top:-7px}
+.hamburger::after{bottom:-7px}
 
-/* Theme toggle base */
-.theme-toggle{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:8px;background:transparent;border:0;cursor:pointer;transition:transform .18s ease, background .18s ease}
+/* Theme toggle */
+.theme-toggle{
+  display:inline-grid;place-items:center;width:44px;height:44px;border-radius:8px;
+  background:transparent;border:0;cursor:pointer;
+  transition:transform .18s ease, background .18s ease
+}
 .theme-toggle svg{width:20px;height:20px;display:block}
 .theme-toggle:focus{outline:3px solid color-mix(in srgb, var(--accent) 22%, transparent);outline-offset:3px}
-
-/* Microanimation */
 .theme-icon{display:inline-block;transition: transform .36s cubic-bezier(.2,.9,.3,1), opacity .28s ease}
-.theme-toggle.changing .theme-icon{ transform: rotate(20deg) scale(.96); opacity: .6; }
+.theme-toggle.changing .theme-icon{ transform: rotate(20deg) scale(.96); opacity:.6; }
 
-/* Hero and layout */
+/* Hero */
 .hero{padding:4.25rem 0}
 .hero-grid{display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:center}
 .kicker{color:var(--accent-2);text-transform:uppercase;font-weight:800;font-size:.77rem;letter-spacing:.9px;margin:0}
@@ -143,109 +135,81 @@ body{
 .hero-subtitle{color:var(--muted);margin:.75rem 0 0;max-width:56ch}
 .hero-actions{margin-top:1.25rem;display:flex;gap:.75rem}
 
-/* Sections and cards */
+/* Sections */
 .section-title{font-size:1.15rem;margin:0 0 1rem;font-weight:800}
+
 .about{padding:3rem 0}
 .about-grid{display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start}
 .about-text p{color:var(--muted);margin-top:.6rem}
 .about-meta{background:var(--panel);padding:1rem;border-radius:12px;box-shadow:var(--soft-shadow)}
 .meta-title{font-size:.95rem;margin:.25rem 0 0;font-weight:700}
 .meta-item{margin:.45rem 0;color:var(--muted)}
+
 .skills{padding:2.75rem 0}
 .skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 .skill-card{background:var(--panel);padding:1rem;border-radius:12px;box-shadow:var(--soft-shadow)}
+
 .projects{padding:2.75rem 0}
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.project-card{background:var(--panel);border-radius:12px;overflow:hidden;box-shadow:var(--soft-shadow);display:flex;flex-direction:column}
+.project-card{
+  background:var(--panel);border-radius:12px;overflow:hidden;box-shadow:var(--soft-shadow);
+  display:flex;flex-direction:column
+}
 .project-thumb{width:100%;height:160px;object-fit:cover;display:block;border-radius:8px}
 .project-body{padding:1rem;display:flex;flex-direction:column;gap:.5rem}
 .project-tags{font-size:.85rem;color:var(--accent)}
 .project-actions{margin-top:auto;display:flex;gap:.5rem}
-.blog{padding:2.5rem 0}
-.posts-list{list-style:none;margin:0;padding:0;display:grid;gap:.75rem}
-.post-item{background:transparent;padding:.65rem;border-radius:10px}
-.post-link{display:block;text-decoration:none;color:inherit}
-.post-link h4{margin:.25rem 0;font-size:1rem}
-.post-excerpt{color:var(--muted);margin:0}
+
 .contact{padding:3rem 0}
 .contact-grid{display:grid;grid-template-columns:1fr 520px;gap:2rem;align-items:start}
 .contact-info p{color:var(--muted)}
 .contact-form{background:var(--panel);padding:1rem;border-radius:12px;box-shadow:var(--soft-shadow)}
 .form-row{display:flex;flex-direction:column;margin-bottom:.75rem}
 .form-row label{font-weight:700;margin-bottom:.35rem}
-.form-row input,.form-row textarea{padding:.6rem .75rem;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:var(--text);transition:box-shadow var(--trans), border-color var(--trans)}
-.form-row input:focus,.form-row textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 6px 20px color-mix(in srgb, var(--accent) 8%, transparent)}
+.form-row input,.form-row textarea{
+  padding:.6rem .75rem;border-radius:8px;border:1px solid rgba(0,0,0,0.06);
+  background:transparent;color:var(--text);
+  transition:box-shadow var(--trans), border-color var(--trans)
+}
+.form-row input:focus,.form-row textarea:focus{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 6px 20px color-mix(in srgb, var(--accent) 8%, transparent)
+}
 .form-actions{margin-top:.5rem}
 .form-status{margin-top:.75rem;color:var(--accent-2)}
+
 .site-footer{padding:1.5rem 0;border-top:1px solid rgba(0,0,0,0.04);background:transparent}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;color:var(--muted)}
 .social-list{display:flex;gap:.5rem;list-style:none;margin:0;padding:0}
 
 /* Skills con íconos SVG */
-.skills { padding: 2.75rem 0; }
-
-.skills-icons {
-  display: grid;
+.skills-icons{
+  display:grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  gap:1rem;list-style:none;margin:0;padding:0;
 }
-
-.skill-item {
-  background: var(--panel);
-  border-radius: var(--radius);
-  box-shadow: var(--soft-shadow);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.skill-item{
+  background:var(--panel);border-radius:var(--radius);box-shadow:var(--soft-shadow);
+  padding:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;
   transition: transform .18s ease, box-shadow var(--trans), background var(--trans);
 }
-
-.skill-item:hover,
-.skill-item:focus {
+.skill-item:hover,.skill-item:focus{
   transform: translateY(-3px);
   box-shadow: var(--shadow);
 }
-
-/* Ajuste clave: tamaño uniforme y sin cortes */
-.skill-icon {
-  width: 64px;
-  height: 64px;
-  display: block;
-  margin-bottom: .5rem;
+.skill-icon{width:64px;height:64px;display:block;margin-bottom:.5rem;overflow:visible}
+.skill-item img.skill-icon{
+  width:64px;height:64px;object-fit:contain;display:block;margin-bottom:.5rem;
 }
-
-.skill-icon { overflow: visible; }
-
-
-/* En caso de tener <img> PNG para otros iconos, igualar comportamiento */
-.skill-item img.skill-icon {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  display: block;
-  margin-bottom: .5rem;
-}
-
-.skill-name {
-  font-weight: 600;
-  font-size: .9rem;
-  color: var(--text);
-  text-align: center;
-}
+.skill-name{font-weight:600;font-size:.9rem;color:var(--text);text-align:center}
 
 /* Dark mode integration */
-.theme-dark .skill-item {
+.theme-dark .skill-item{
   background: color-mix(in srgb, var(--panel) 86%, transparent);
   border: 1px solid rgba(255,255,255,0.04);
 }
-
 .theme-dark .skill-item:hover,
-.theme-dark .skill-item:focus {
+.theme-dark .skill-item:focus{
   box-shadow: 0 10px 24px rgba(0,0,0,0.5);
 }
 
@@ -253,50 +217,19 @@ body{
 @media (max-width:1100px){
   .skills-icons { grid-template-columns: repeat(3, 1fr); }
 }
-
 @media (max-width:900px){
   .skills-icons { grid-template-columns: repeat(2, 1fr); }
 }
-
 @media (max-width:520px){
   .skills-icons { grid-template-columns: 1fr 1fr; }
 }
-
 @media (max-width:380px){
   .skills-icons { grid-template-columns: 1fr; }
 }
 
-/* Blog / Articulos */
-/* Blog: cards, tags y dialog */
-.posts-list { display: grid; gap: .75rem; grid-template-columns: 1fr; list-style:none; margin:0; padding:0; }
-@media (min-width: 720px) { .posts-list { grid-template-columns: repeat(2, 1fr); } }
-
-.post-item { background: var(--panel); padding: .9rem; border-radius: 10px; box-shadow: var(--soft-shadow); }
-.post-link { display:block; color:inherit; text-decoration:none; outline:none; }
-.post-link:focus-visible { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 14%, transparent); }
-.post-title { margin:.15rem 0; font-size:1rem; font-weight:700; }
-.post-excerpt { color:var(--muted); margin:0; }
-.post-meta { color: color-mix(in srgb, var(--muted) 90%, transparent); margin-top:.5rem; font-size:.9rem; }
-.tag { background: color-mix(in srgb, var(--accent) 10%, transparent); padding:.18rem .45rem; border-radius:8px; font-size:.82rem; }
-
-.dialog-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center; z-index:120; }
-
-/* Dialog */
-dialog { max-width: min(80ch, 900px); width: calc(100% - 2rem); border: none; border-radius: 12px; padding:0; }
-.post-article { padding: 1.25rem; background: var(--panel); color: var(--text); outline: none; }
-#dialog-content { margin-top:.75rem; color: var(--muted); line-height:1.6; }
-#dialog-close { margin-left:.5rem; }
-
-.post-item[hidden] { display:none !important; }
-
-/* Small tweaks to ensure dialog content readable in dark mode */
-.theme-dark dialog .post-article { background: color-mix(in srgb, var(--panel) 86%, transparent); }
-
-
-
 /* Dark-mode button contrasts and inputs */
 .theme-dark .btn--primary{
-  color: #ffffff !important;
+  color:#ffffff !important;
   background: linear-gradient(90deg,#3aa0ff 0%, #6ee7b7 100%);
   box-shadow: 0 10px 30px rgba(2,8,20,0.6);
   border: 1px solid rgba(255,255,255,0.04);
@@ -332,7 +265,7 @@ dialog { max-width: min(80ch, 900px); width: calc(100% - 2rem); border: none; bo
 .theme-dark p,
 .theme-dark .meta-item { color: var(--muted); }
 
-/* Responsive */
+/* Responsive layout */
 @media (max-width:1100px){
   .hero-grid{grid-template-columns:1fr 320px}
   .contact-grid{grid-template-columns:1fr}
@@ -340,18 +273,18 @@ dialog { max-width: min(80ch, 900px); width: calc(100% - 2rem); border: none; bo
   .skills-grid{grid-template-columns:repeat(2,1fr)}
   .projects-grid{grid-template-columns:repeat(2,1fr)}
 }
-
 @media (max-width:900px){
   .header-inner{padding:.75rem 0}
   .nav-toggle{display:inline-flex}
   .primary-nav{
-    position:absolute;top:68px;right:1rem;min-width:220px;background:var(--panel);box-shadow:var(--shadow);border-radius:12px;padding:.6rem;display:none;
+    position:absolute;top:68px;right:1rem;min-width:220px;background:var(--panel);
+    box-shadow:var(--shadow);border-radius:12px;padding:.6rem;display:none;
   }
   .primary-nav.is-open{display:block}
   .nav-list{flex-direction:column;gap:.4rem}
   .brand__title{display:none}
   .hero-grid{grid-template-columns:1fr;gap:1.25rem}
-  .hero-illustration{width: 180px; margin: 0 auto;}
+  .hero-illustration{width:180px;margin:0 auto;}
   .projects-grid{grid-template-columns:1fr}
   .skills-grid{grid-template-columns:1fr}
 }
