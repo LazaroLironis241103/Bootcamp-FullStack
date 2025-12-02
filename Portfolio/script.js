@@ -119,26 +119,145 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Form handling (requiere #contact-form y #form-status en HTML)
-  const form = document.getElementById('contact-form');
-  const status = document.getElementById('form-status');
-  if (form && status) {
-    form.addEventListener('submit', (e) => {
+  // -------------------------
+  // Manejo del formulario de contacto (integrado aquí)
+  // Requiere en el HTML: #contact-form, #form-status, botón submit con id #submitBtn
+  // -------------------------
+  (function initContactForm() {
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    if (!form || !status) return;
+
+    const submitBtn = document.getElementById('submitBtn');
+
+    const setStatus = (msg, type = '') => {
+      status.textContent = msg;
+      status.className = 'form-status' + (type ? ' ' + type : '');
+      status.hidden = false;
+    };
+
+    const clearStatus = () => {
+      status.textContent = '';
+      status.className = 'form-status';
+      status.hidden = true;
+    };
+
+    const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+    const validateFields = () => {
+      clearStatus();
+      let valid = true;
+      const fields = [
+        form.querySelector('#name'),
+        form.querySelector('#email'),
+        form.querySelector('#subject'),
+        form.querySelector('#message')
+      ];
+
+      for (const el of fields) {
+        if (!el) continue;
+        if (!el.value.trim()) {
+          el.setAttribute('aria-invalid', 'true');
+          valid = false;
+        } else {
+          el.removeAttribute('aria-invalid');
+        }
+      }
+
+      const emailEl = form.querySelector('#email');
+      if (emailEl && emailEl.value.trim() && !isEmailValid(emailEl.value)) {
+        emailEl.setAttribute('aria-invalid', 'true');
+        setStatus('Ingresa un correo válido.', 'error');
+        emailEl.focus();
+        return false;
+      }
+
+      if (!valid) {
+        setStatus('Por favor completá los campos requeridos.', 'error');
+        const firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if (firstInvalid) firstInvalid.focus();
+        return false;
+      }
+
+      return true;
+    };
+
+    // Quitar aria-invalid al escribir
+    form.addEventListener('input', (e) => {
+      if (e.target && e.target.getAttribute && e.target.getAttribute('aria-invalid') === 'true') {
+        if (e.target.value.trim()) e.target.removeAttribute('aria-invalid');
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (submitBtn && submitBtn.disabled) return;
+
+      clearStatus();
+
+      // HTML5 native constraints
       if (!form.reportValidity()) {
-        status.hidden = false;
-        status.textContent = 'Por favor completá los campos requeridos.';
-        status.style.color = 'var(--accent)';
+        setStatus('Por favor completá los campos requeridos.', 'error');
         return;
       }
-      status.hidden = false;
-      status.textContent = 'Enviando...';
-      status.style.color = 'var(--muted)';
-      setTimeout(() => {
-        status.textContent = 'Mensaje enviado. ¡Gracias!';
-        status.style.color = 'var(--accent-2)';
-        form.reset();
-      }, 900);
+
+      // Honeypot: si tiene valor, es bot
+      const hp = form.querySelector('input[name="website"]');
+      if (hp && hp.value) {
+        setStatus('Spam detectado.', 'error');
+        return;
+      }
+
+      // Validación adicional
+      if (!validateFields()) return;
+
+      // Prevención de doble envío
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+      }
+      setStatus('Enviando...', '');
+
+      // === CONFIGURA AQUÍ TU ENDPOINT DE FORMSPREE ===
+      const ACTION_URL = 'https://formspree.io/f/xldqnopn'; // <- endpoint proporcionado
+
+      try {
+        // Aseguramos _replyto para Formspree (opcional)
+        const replyTo = form.querySelector('#_replyto');
+        const emailEl = form.querySelector('#email');
+        if (replyTo && emailEl) replyTo.value = emailEl.value.trim();
+
+        // Autogenerar asunto si está vacío
+        if (form.subject && !form.subject.value.trim()) {
+          const auto = (form.message && form.message.value.trim().slice(0, 80)) || '';
+          form.subject.value = auto ? `Consulta: ${auto.replace(/\s+$/,'')}` : 'Consulta desde portfolio';
+        }
+
+        const formData = new FormData(form);
+
+        const res = await fetch(ACTION_URL, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          setStatus('Mensaje enviado. Gracias por escribir.', 'success');
+          form.reset();
+        } else {
+          const data = await res.json().catch(() => ({}));
+          // Mostrar mensaje de error más informativo si Formspree lo devuelve
+          setStatus(data.error || data.message || 'Error al enviar. Intenta nuevamente.', 'error');
+        }
+      } catch (err) {
+        setStatus('Error de red. Intenta más tarde.', 'error');
+        console.error('Contact form error:', err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute('aria-busy');
+        }
+      }
     });
-  }
+  })();
 });

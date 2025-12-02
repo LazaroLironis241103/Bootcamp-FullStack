@@ -251,39 +251,49 @@
       <div class="container contact-grid">
         <div class="contact-info">
           <h3 class="section-title">Contacto</h3>
-          <p class="contact-lead" style="margin-top:.6rem;">¿Tienes un proyecto en mente o querés conectar? Envíame un
-            mensaje y te responderé lo antes posible.</p>
-          <p style="margin-top:.5rem; color:var(--muted);">También podés escribir a <a
+          <p class="contact-lead">¿Tienes un proyecto en mente o querés conectar? Envíame un mensaje y te responderé lo
+            antes posible.</p>
+          <p class="contact-muted">También podés escribir a <a
               href="mailto:lazarolironis03@gmail.com">lazarolironis03@gmail.com</a></p>
         </div>
 
-        <form id="contact-form" class="contact-form" action="#" method="post" novalidate>
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/xldqnopn" method="POST" novalidate>
           <div class="form-row">
             <label for="name">Nombre</label>
-            <input id="name" name="name" type="text" required autocomplete="name" />
+            <input id="name" name="name" type="text" required autocomplete="name" aria-required="true" />
           </div>
 
           <div class="form-row">
             <label for="email">Correo electrónico</label>
-            <input id="email" name="email" type="email" required autocomplete="email" />
+            <input id="email" name="email" type="email" required autocomplete="email" aria-required="true" />
           </div>
 
           <div class="form-row">
             <label for="subject">Asunto</label>
-            <input id="subject" name="subject" type="text" required />
+            <input id="subject" name="subject" type="text" required aria-required="true" />
           </div>
 
           <div class="form-row">
             <label for="message">Mensaje</label>
-            <textarea id="message" name="message" rows="6" required></textarea>
+            <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
           </div>
+
+          <!-- Honeypot: campo oculto para bots -->
+          <div class="hp" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" autocomplete="off" tabindex="-1" />
+          </div>
+
+          <!-- Campo oculto para que Formspree use como reply-to -->
+          <input type="hidden" name="_replyto" id="_replyto" />
 
           <div class="form-actions">
-            <button class="btn btn--primary" type="submit">Enviar mensaje</button>
+            <button id="submitBtn" class="btn btn--primary" type="submit">Enviar mensaje</button>
           </div>
 
-          <div id="form-status" class="form-status" aria-live="polite" hidden></div>
+          <div id="form-status" class="form-status" role="status" aria-live="polite" hidden></div>
         </form>
+
       </div>
     </section>
 
