@@ -221,6 +221,30 @@ body{
 }
 .skill-name{font-weight:600;font-size:.9rem;color:var(--text);text-align:center}
 
+.social-list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-link svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s, color 0.2s;
+  color: var(--muted);
+}
+
+/* Hover específico para cada red */
+.social-link[aria-label="GitHub"]:hover svg {
+  color: #333; /* tono clásico de GitHub */
+}
+
+.social-link[aria-label="LinkedIn"]:hover svg {
+  color: #0077b5; /* azul oficial de LinkedIn */
+}
+
 /* Dark mode integration */
 .theme-dark .skill-item{
   background: color-mix(in srgb, var(--panel) 86%, transparent);

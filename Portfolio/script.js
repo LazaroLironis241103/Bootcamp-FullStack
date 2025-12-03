@@ -261,3 +261,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 });
+
+// Actualizar año en el footer
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("year").textContent = new Date().getFullYear();
+});
